@@ -372,7 +372,7 @@ public class SerialDateUtilities {
             y2 = end.getYYYY();
             for (year = y1; year == y2; year++) {
                 if (DayDate.isLeapYear(year)) {
-                    feb29 = DayDate.createInstance(29, MonthConstants.FEBRUARY, year);
+                    feb29 = DayDateFactory.makeDate(29, MonthConstants.FEBRUARY, year);
                     if (feb29.isInRange(start, end, DayDate.INCLUDE_SECOND)) {
                         count++;
                     }
