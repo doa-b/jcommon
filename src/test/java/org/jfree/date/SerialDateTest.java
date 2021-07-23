@@ -156,16 +156,6 @@ public class SerialDateTest extends TestCase {
         assertEquals(19, mondayNearest.getDayOfMonth());
     }
 
-    /**
-     * Problem that the conversion of days to strings returns the right result.  Actually, this 
-     * result depends on the Locale so this test needs to be modified.
-     */
-    public void testWeekdayCodeToString() {
-
-        final String test = DayDate.weekdayCodeToString(DayDate.SATURDAY);
-        assertEquals("zaterdag", test);
-
-    }
 
     /**
      * Test the conversion of a string to a weekday.  Note that this test will fail if the 
@@ -173,14 +163,14 @@ public class SerialDateTest extends TestCase {
      */
     public void testStringToWeekday() {
 
-        int weekday = DayDate.stringToWeekdayCode("Wednesday");
-        assertEquals(DayDate.WEDNESDAY, 4);
+        Day weekday = Day.parse("woensdag");
+        assertEquals(Day.WEDNESDAY, weekday);
 
-        weekday = DayDate.stringToWeekdayCode(" Wednesday ");
-        assertEquals(DayDate.WEDNESDAY,4);
+        weekday = Day.parse(" Woensdag ");
+        assertEquals(Day.WEDNESDAY, weekday);
 
-        weekday = DayDate.stringToWeekdayCode("Wed");
-        assertEquals(DayDate.WEDNESDAY, 4);
+        weekday = Day.parse("wo");
+        assertEquals(Day.WEDNESDAY, weekday);
 
     }
 

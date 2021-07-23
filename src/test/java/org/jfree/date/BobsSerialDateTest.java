@@ -17,14 +17,13 @@ public class BobsSerialDateTest extends TestCase {
 
     public void testStringToWeekdayCode() throws Exception {
 
-        assertEquals(-1, stringToWeekdayCode("Hello"));
-        assertEquals(MONDAY, stringToWeekdayCode("maandag"));
-        assertEquals(MONDAY, stringToWeekdayCode("ma"));
-        assertEquals(MONDAY, stringToWeekdayCode("maandag"));
-        assertEquals(MONDAY, stringToWeekdayCode("MAANDAG"));
-        assertEquals(MONDAY, stringToWeekdayCode("ma"));
-        assertEquals(TUESDAY, stringToWeekdayCode("Dinsdag"));
-        assertEquals(TUESDAY, stringToWeekdayCode("di"));
+        assertEquals(Day.MONDAY, Day.parse("maandag"));
+        assertEquals(Day.MONDAY, Day.parse("ma"));
+        assertEquals(Day.MONDAY, Day.parse("maandag"));
+        assertEquals(Day.MONDAY, Day.parse("MAANDAG"));
+        assertEquals(Day.MONDAY, Day.parse("ma"));
+        assertEquals(Day.TUESDAY, Day.parse("Dinsdag"));
+        assertEquals(Day.TUESDAY, Day.parse("di"));
 //        assertEquals(TUESDAY, stringToWeekdayCode("donderdag"));
 //        assertEquals(TUESDAY, stringToWeekdayCode("DONDERDAG"));
        //assertEquals(TUESDAY, stringToWeekdayCode("tue"));
@@ -59,13 +58,13 @@ public class BobsSerialDateTest extends TestCase {
 
 
     public void testWeekdayCodeToString() throws Exception {
-        assertEquals("zondag", weekdayCodeToString(SUNDAY));
-        assertEquals("maandag", weekdayCodeToString(MONDAY));
-        assertEquals("dinsdag", weekdayCodeToString(TUESDAY));
-        assertEquals("woensdag", weekdayCodeToString(WEDNESDAY));
-        assertEquals("donderdag", weekdayCodeToString(THURSDAY));
-        assertEquals("vrijdag", weekdayCodeToString(FRIDAY));
-        assertEquals("zaterdag", weekdayCodeToString(SATURDAY));
+//        assertEquals("zondag", Day.parse(Day(0));
+//        assertEquals("maandag", Day.parse(Day.MONDAY.toString()));
+//        assertEquals("dinsdag", Day.parse(Day.TUESDAY.toString()));
+//        assertEquals("woensdag", Day.parse(Day.WEDNESDAY.toString()));
+//        assertEquals("donderdag", Day.parse(Day.THURSDAY.toString()));
+//        assertEquals("vrijdag", Day.parse(Day.FRIDAY.toString()));
+//        assertEquals("zaterdag", Day.parse(Day.SATURDAY.toString()));
     }
 
     public void testIsValidMonthCode() throws Exception {
