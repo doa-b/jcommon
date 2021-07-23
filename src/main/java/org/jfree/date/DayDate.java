@@ -122,39 +122,11 @@ public abstract class DayDate implements Comparable,
     public static final DateFormatSymbols
             DATE_FORMAT_SYMBOLS = new SimpleDateFormat().getDateFormatSymbols();
 
-    public static final int MINIMUM_YEAR_SUPPORTED = 1900;
-
-    public static final int MAXIMUM_YEAR_SUPPORTED = 9999;
-
-    /**
-     * Useful constant for Monday. Equivalent to java.util.Calendar.MONDAY.
-     */
     public static final int MONDAY = Calendar.MONDAY;
-
-    /**
-     * Useful constant for Tuesday. Equivalent to java.util.Calendar.TUESDAY.
-     */
     public static final int TUESDAY = Calendar.TUESDAY;
-
-    /**
-     * Useful constant for Wednesday. Equivalent to
-     * java.util.Calendar.WEDNESDAY.
-     */
     public static final int WEDNESDAY = Calendar.WEDNESDAY;
-
-    /**
-     * Useful constant for Thrusday. Equivalent to java.util.Calendar.THURSDAY.
-     */
     public static final int THURSDAY = Calendar.THURSDAY;
-
-    /**
-     * Useful constant for Friday. Equivalent to java.util.Calendar.FRIDAY.
-     */
     public static final int FRIDAY = Calendar.FRIDAY;
-
-    /**
-     * Useful constant for Saturday. Equivalent to java.util.Calendar.SATURDAY.
-     */
     public static final int SATURDAY = Calendar.SATURDAY;
 
     /**
