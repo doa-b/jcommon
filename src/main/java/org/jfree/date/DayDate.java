@@ -62,7 +62,6 @@ import java.io.Serializable;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 /**
  * An abstract class that defines our requirements for manipulating dates,
@@ -100,6 +99,7 @@ public abstract class DayDate implements Comparable,
         OCTOBER(10),
         NOVEMBER(11),
         DECEMBER(12);
+
         Month(int index) {
             this.index = index;
         }
@@ -111,6 +111,7 @@ public abstract class DayDate implements Comparable,
             }
             throw new IllegalArgumentException("Invalid month index " + monthIndex);
         }
+
         public final int index;
     }
 
@@ -137,10 +138,19 @@ public abstract class DayDate implements Comparable,
     /**
      * The number of days in each month in non leap years.
      */
-   static final int[] LAST_DAY_OF_MONTH =
+    static final int[] LAST_DAY_OF_MONTH =
             {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 
+    public enum WeekInMonth {
+        FIRST(1), SECOND(2), THIRD(3), FOURTH(4), LAST(0);
+        public final int index;
+
+        WeekInMonth(int index) {
+            this.index = index;
+        }
+    }
+    // TODO replace these
     public static final int FIRST_WEEK_IN_MONTH = 1;
     public static final int SECOND_WEEK_IN_MONTH = 2;
     public static final int THIRD_WEEK_IN_MONTH = 3;
@@ -148,54 +158,34 @@ public abstract class DayDate implements Comparable,
 
     public static final int LAST_WEEK_IN_MONTH = 0;
 
-    /**
-     * Useful range constant.
-     */
+    public enum DateInterval {
+        CLOSED(0), CLOSED_LEFT(1), CLOSED_RIGHT(2), OPEN(3);
+        public final int index;
+
+        DateInterval(int index) {
+            this.index = index;
+        }
+    }
+
+    // TODO remove these
     public static final int INCLUDE_NONE = 0;
-
-    /**
-     * Useful range constant.
-     */
-    public static final int INCLUDE_FIRST = 1;
-
-    /**
-     * Useful range constant.
-     */
-    public static final int INCLUDE_SECOND = 2;
-
-    /**
-     * Useful range constant.
-     */
+     public static final int INCLUDE_FIRST = 1;
+     public static final int INCLUDE_SECOND = 2;
     public static final int INCLUDE_BOTH = 3;
 
-    /**
-     * Useful constant for specifying a day of the week relative to a fixed
-     * date.
-     */
-    public static final int PRECEDING = -1;
+    public enum WeekdayRange {
+        LAST(-1), NEAREST(0), NEXT(1);
+        public final int index;
 
-    /**
-     * Useful constant for specifying a day of the week relative to a fixed
-     * date.
-     */
-    public static final int NEAREST = 0;
-
-    /**
-     * Useful constant for specifying a day of the week relative to a fixed
-     * date.
-     */
-    public static final int FOLLOWING = 1;
-
-    /**
-     * A description for the date.
-     */
-    private String description;
-
-    /**
-     * Default constructor.
-     */
-    protected DayDate() {
+        WeekdayRange(int index) {
+            this.index = index;
+        }
     }
+
+    // TODO remove these
+    public static final int PRECEDING = -1;
+    public static final int NEAREST = 0;
+    public static final int FOLLOWING = 1;
 
     /**
      * Returns <code>true</code> if the supplied integer code represents a
@@ -350,7 +340,7 @@ public abstract class DayDate implements Comparable,
                 return 4;
             default:
                 throw new IllegalArgumentException(
-                        "SerialDate.monthCodeToQuarter: invalid month code.");
+                        "SerialDate.monthCodeToQuarter: invalid month code." );
         }
 
     }
@@ -387,7 +377,7 @@ public abstract class DayDate implements Comparable,
         // check arguments...
         if (!isValidMonthCode(month)) {
             throw new IllegalArgumentException(
-                    "SerialDate.monthCodeToString: month outside valid range.");
+                    "SerialDate.monthCodeToString: month outside valid range." );
         }
 
         final String[] months;
@@ -766,32 +756,6 @@ public abstract class DayDate implements Comparable,
      */
     public abstract java.util.Date toDate();
 
-    /**
-     * Returns the description that is attached to the date.  It is not
-     * required that a date have a description, but for some applications it
-     * is useful.
-     *
-     * @return The description (possibly <code>null</code>).
-     */
-    public String getDescription() {
-        return this.description;
-    }
-
-    /**
-     * Sets the description for the date.
-     *
-     * @param description the description for this date (<code>null</code>
-     *                    permitted).
-     */
-    public void setDescription(final String description) {
-        this.description = description;
-    }
-
-    /**
-     * Converts the date to a string.
-     *
-     * @return a string representation of the date.
-     */
     public String toString() {
         return getDayOfMonth() + "-" + DayDate.monthCodeToString(getMonth())
                 + "-" + getYYYY();

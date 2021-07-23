@@ -60,10 +60,14 @@ import junit.framework.TestSuite;
  */
 public class SpreadsheetDateTest extends TestCase {
 
-    /** Date representing 1 January 1900. */
+    /**
+     * Date representing 1 January 1900.
+     */
     private DayDate jan1Y1900;
 
-    /** Date representing serial day number 2. */
+    /**
+     * Date representing serial day number 2.
+     */
     private DayDate s2;
 
     /**
@@ -78,7 +82,7 @@ public class SpreadsheetDateTest extends TestCase {
     /**
      * Creates a new test case.
      *
-     * @param name  the name.
+     * @param name the name.
      */
     public SpreadsheetDateTest(final String name) {
         super(name);
@@ -217,7 +221,7 @@ public class SpreadsheetDateTest extends TestCase {
      * Create a date for 28-Feb-1900: the serial number should be 60.
      */
     public void test28Feb1900ToSerial() {
-        SpreadsheetDate d = new SpreadsheetDate(28, MonthConstants.FEBRUARY, 
+        SpreadsheetDate d = new SpreadsheetDate(28, MonthConstants.FEBRUARY,
                 1900);
         assertEquals(60, d.toSerial());
     }
@@ -234,7 +238,7 @@ public class SpreadsheetDateTest extends TestCase {
      * Create a date for 31-Dec-1999: the serial number should be 36525.
      */
     public void test31Dec1999ToSerial() {
-        SpreadsheetDate d = new SpreadsheetDate(31, MonthConstants.DECEMBER, 
+        SpreadsheetDate d = new SpreadsheetDate(31, MonthConstants.DECEMBER,
                 1999);
         assertEquals(36525, d.toSerial());
     }
@@ -243,7 +247,7 @@ public class SpreadsheetDateTest extends TestCase {
      * Create a date for 1-Jan-2000: the serial number should be 36526.
      */
     public void test01Jan2000ToSerial() {
-        SpreadsheetDate d = new SpreadsheetDate(1, MonthConstants.JANUARY, 
+        SpreadsheetDate d = new SpreadsheetDate(1, MonthConstants.JANUARY,
                 2000);
         assertEquals(36526, d.toSerial());
     }
@@ -252,7 +256,7 @@ public class SpreadsheetDateTest extends TestCase {
      * Create a date for 31-Jan-2000: the serial number should be 36556.
      */
     public void test31Jan2000ToSerial() {
-        SpreadsheetDate d = new SpreadsheetDate(31, MonthConstants.JANUARY, 
+        SpreadsheetDate d = new SpreadsheetDate(31, MonthConstants.JANUARY,
                 2000);
         assertEquals(36556, d.toSerial());
     }
@@ -261,7 +265,7 @@ public class SpreadsheetDateTest extends TestCase {
      * Create a date for 01-Feb-2000: the serial number should be 36557.
      */
     public void test01Feb2000ToSerial() {
-        SpreadsheetDate d = new SpreadsheetDate(1, MonthConstants.FEBRUARY, 
+        SpreadsheetDate d = new SpreadsheetDate(1, MonthConstants.FEBRUARY,
                 2000);
         assertEquals(36557, d.toSerial());
     }
@@ -270,7 +274,7 @@ public class SpreadsheetDateTest extends TestCase {
      * Create a date for 28-Feb-2000: the serial number should be 36584.
      */
     public void test28Feb2000ToSerial() {
-        SpreadsheetDate d = new SpreadsheetDate(28, MonthConstants.FEBRUARY, 
+        SpreadsheetDate d = new SpreadsheetDate(28, MonthConstants.FEBRUARY,
                 2000);
         assertEquals(36584, d.toSerial());
     }
@@ -279,7 +283,7 @@ public class SpreadsheetDateTest extends TestCase {
      * Create a date for 29-Feb-2000: the serial number should be 36585.
      */
     public void test29feb2000ToSerial() {
-        SpreadsheetDate d = new SpreadsheetDate(29, MonthConstants.FEBRUARY, 
+        SpreadsheetDate d = new SpreadsheetDate(29, MonthConstants.FEBRUARY,
                 2000);
         assertEquals(36585, d.toSerial());
     }
@@ -310,34 +314,12 @@ public class SpreadsheetDateTest extends TestCase {
                     buffer.toByteArray()));
             d2 = (SpreadsheetDate) in.readObject();
             in.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.toString());
         }
         assertEquals(d1, d2);
 
     }
-
-    /**
-     * Some checks for the getDescription() method.
-     */
-    public void testGetDescription() {
-        SpreadsheetDate d1 = new SpreadsheetDate(15, 4, 2000);
-        assertEquals(null, d1.getDescription());
-        d1.setDescription("XYZ");
-        assertEquals("XYZ", d1.getDescription());
-    }
-
-    /**
-     * Some checks for the setDescription() method.
-     */
-    public void testSetDescription() {
-        SpreadsheetDate d1 = new SpreadsheetDate(15, 4, 2000);
-        assertEquals(null, d1.getDescription());
-        d1.setDescription("XYZ");
-        assertEquals("XYZ", d1.getDescription());
-        d1.setDescription(null);
-        assertEquals(null, d1.getDescription());
-    }
-
 }
+
+
