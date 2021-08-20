@@ -58,13 +58,13 @@ public class BobsSerialDateTest extends TestCase {
 
 
     public void testWeekdayCodeToString() throws Exception {
-//        assertEquals("zondag", Day.parse(Day(0));
-//        assertEquals("maandag", Day.parse(Day.MONDAY.toString()));
-//        assertEquals("dinsdag", Day.parse(Day.TUESDAY.toString()));
-//        assertEquals("woensdag", Day.parse(Day.WEDNESDAY.toString()));
-//        assertEquals("donderdag", Day.parse(Day.THURSDAY.toString()));
-//        assertEquals("vrijdag", Day.parse(Day.FRIDAY.toString()));
-//        assertEquals("zaterdag", Day.parse(Day.SATURDAY.toString()));
+        assertEquals("zondag", Day.SUNDAY.toString());
+        assertEquals("maandag", Day.MONDAY.toString());
+        assertEquals("dinsdag", Day.TUESDAY.toString());
+        assertEquals("woensdag", Day.WEDNESDAY.toString());
+        assertEquals("donderdag", Day.THURSDAY.toString());
+        assertEquals("vrijdag", Day.FRIDAY.toString());
+        assertEquals("zaterdag", Day.SATURDAY.toString());
     }
 
     public void testIsValidMonthCode() throws Exception {

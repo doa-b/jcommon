@@ -23,7 +23,7 @@ public enum Day {
         index = day;
     }
 
-    public static Day fromInt(int dayIndex) throws IllegalArgumentException {
+    public static Day make(int dayIndex) throws IllegalArgumentException {
         for (Day d : Day.values()) {
             if (d.index == dayIndex)
                 return d;
@@ -46,5 +46,9 @@ public enum Day {
         }
         throw new IllegalArgumentException(
                 String.format("%s is not a valid weekday string", s));
+    }
+
+    public String toString() {
+        return dateSymbols.getWeekdays()[index];
     }
 }
