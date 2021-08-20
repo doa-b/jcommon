@@ -230,6 +230,7 @@ public abstract class DayDate implements Comparable,
      * @return <code>true</code> if the supplied integer code represents a
      * valid month.
      */
+    // TODO should be deleted after Month ENUM is fully integrated
     public static boolean isValidMonthCode(final int code) {
 
         switch (code) {
@@ -258,6 +259,7 @@ public abstract class DayDate implements Comparable,
      * @param code the month code (1-12).
      * @return the quarter that the month belongs to.
      */
+    // TODO Remove when Month is integrated
     public static int monthCodeToQuarter(final int code) {
 
         switch (code) {
@@ -293,6 +295,7 @@ public abstract class DayDate implements Comparable,
      * @param month the month.
      * @return a string representing the supplied month.
      */
+    // TODO Remove
     public static String monthCodeToString(final int month) {
 
         return monthCodeToString(month, false);
@@ -310,6 +313,7 @@ public abstract class DayDate implements Comparable,
      *                  month.
      * @return a string representing the supplied month.
      */
+    // TODO Remove
     public static String monthCodeToString(final int month,
                                            final boolean shortened) {
 
@@ -342,6 +346,7 @@ public abstract class DayDate implements Comparable,
      * @return <code>-1</code> if the string is not parseable, the month of the
      * year otherwise.
      */
+    // TODO REMOVE
     public static int stringToMonthCode(String s) {
 
         final String[] shortMonthNames = DATE_FORMAT_SYMBOLS.getShortMonths();
@@ -402,39 +407,14 @@ public abstract class DayDate implements Comparable,
     /**
      * Determines whether or not the specified year is a leap year.
      *
-     * @param yyyy the year (in the range 1900 to 9999).
+     * @param year the year (in the range 1900 to 9999).
      * @return <code>true</code> if the specified year is a leap year.
      */
-    public static boolean isLeapYear(final int yyyy) {
-
-        if ((yyyy % 4) != 0) {
-            return false;
-        } else if ((yyyy % 400) == 0) {
-            return true;
-        } else if ((yyyy % 100) == 0) {
-            return false;
-        } else {
-            return true;
-        }
-
-    }
-
-    /**
-     * Returns the number of leap years from 1900 to the specified year
-     * INCLUSIVE.
-     * <p>
-     * Note that 1900 is not a leap year.
-     *
-     * @param yyyy the year (in the range 1900 to 9999).
-     * @return the number of leap years from 1900 to the specified year.
-     */
-    public static int leapYearCount(final int yyyy) {
-
-        final int leap4 = (yyyy - 1896) / 4;
-        final int leap100 = (yyyy - 1800) / 100;
-        final int leap400 = (yyyy - 1600) / 400;
-        return leap4 - leap100 + leap400;
-
+    public static boolean isLeapYear(final int year) {
+        boolean fourth = year % 4 == 0;
+        boolean hundredth = year % 100 == 0;
+        boolean fourHundredth = year % 400 == 0;
+        return fourth && (!hundredth || fourHundredth);
     }
 
     /**
@@ -445,6 +425,7 @@ public abstract class DayDate implements Comparable,
      * @param yyyy  the year (in the range 1900 to 9999).
      * @return the number of the last day of the month.
      */
+
     public static int lastDayOfMonth(final int month, final int yyyy) {
 
         final int result = LAST_DAY_OF_MONTH[month];
