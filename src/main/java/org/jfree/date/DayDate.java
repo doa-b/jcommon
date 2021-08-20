@@ -159,15 +159,6 @@ public abstract class DayDate implements Comparable,
 
     public static final int LAST_WEEK_IN_MONTH = 0;
 
-    public enum DateInterval {
-        CLOSED(0), CLOSED_LEFT(1), CLOSED_RIGHT(2), OPEN(3);
-        public final int index;
-
-        DateInterval(int index) {
-            this.index = index;
-        }
-    }
-
     // TODO remove these
     public static final int INCLUDE_NONE = 0;
      public static final int INCLUDE_FIRST = 1;
@@ -733,16 +724,6 @@ public abstract class DayDate implements Comparable,
      */
     public abstract boolean isOnOrAfter(DayDate other);
 
-    /**
-     * Returns <code>true</code> if this {@link DayDate} is within the
-     * specified range (INCLUSIVE).  The date order of d1 and d2 is not
-     * important.
-     *
-     * @param d1 a boundary date for the range.
-     * @param d2 the other boundary date for the range.
-     * @return A boolean.
-     */
-    public abstract boolean isInRange(DayDate d1, DayDate d2);
 
     /**
      * Returns <code>true</code> if this {@link DayDate} is within the
@@ -755,8 +736,11 @@ public abstract class DayDate implements Comparable,
      *                dates are included in the range.
      * @return A boolean.
      */
-    public abstract boolean isInRange(DayDate d1, DayDate d2,
-                                      int include);
+    public boolean isInRange(DayDate d1, DayDate d2, DateInterval interval) {
+        int left = Math.min(d1.getOrdinalDay(), d2.getOrdinalDay());
+        int right = Math.max(d1.getOrdinalDay(), d2.getOrdinalDay());
+        return interval.isIn(getOrdinalDay(), left, right);
+    }
 
     /**
      * Returns the latest date that falls on the specified day-of-the-week and
