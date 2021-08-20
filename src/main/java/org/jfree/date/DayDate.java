@@ -62,6 +62,7 @@ import java.io.Serializable;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * An abstract class that defines our requirements for manipulating dates,
@@ -448,7 +449,7 @@ public abstract class DayDate implements Comparable,
      * @return a new date.
      */
     public static DayDate plusDays(final int days, final DayDate base) {
-        return DayDateFactory.makeDate(base.toOrdinal() + days);
+        return DayDateFactory.makeDate(base.getOrdinalDay() + days);
 
     }
 
@@ -520,7 +521,7 @@ public abstract class DayDate implements Comparable,
 
         // find the date...
         final int adjust;
-        final int baseDOW = base.getDayOfWeek();
+        final int baseDOW = base.getDayOfWeek().ordinal();
         if (baseDOW > targetWeekday) {
             adjust = Math.min(0, targetWeekday - baseDOW);
         } else {
@@ -552,7 +553,7 @@ public abstract class DayDate implements Comparable,
 
         // find the date...
         final int adjust;
-        final int baseDOW = base.getDayOfWeek();
+        final int baseDOW = base.getDayOfWeek().ordinal();
         if (baseDOW >= targetWeekday) {
             adjust = 7 + Math.min(0, targetWeekday - baseDOW);
         } else {
@@ -582,7 +583,7 @@ public abstract class DayDate implements Comparable,
         }
 
         // find the date...
-        int delta = targetDOW - base.getDayOfWeek();
+        int delta = targetDOW - base.getDayOfWeek().ordinal();
         int positveDelta = delta + 7;
         int adjust = positveDelta % 7;
         if (adjust > 3) {
@@ -607,26 +608,31 @@ public abstract class DayDate implements Comparable,
     }
 
     /**
+     * Returns a <code>java.util.Date</code> equivalent to this date.
+     *
+     * @return The date.
+     */
+    public Date toDate() {
+        final Calendar calendar = Calendar.getInstance();
+        calendar.set(getYear(), getMonth() - 1, getDayOfMonth(), 0, 0, 0);
+        return calendar.getTime();
+    }
+
+    /**
      * Returns the serial number for the date, where 1 January 1900 = 2 (this
      * corresponds, almost, to the numbering system used in Microsoft Excel for
      * Windows and Lotus 1-2-3).
      *
      * @return the serial number for the date.
      */
-    public abstract int toOrdinal();
-
-    /**
-     * Returns a java.util.Date.  Since java.util.Date has more precision than
-     * SerialDate, we need to define a convention for the 'time of day'.
-     *
-     * @return this as <code>java.util.Date</code>.
-     */
-    public abstract java.util.Date toDate();
+    public abstract int getOrdinalDay();
 
     public String toString() {
         return getDayOfMonth() + "-" + DayDate.monthCodeToString(getMonth())
                 + "-" + getYear();
     }
+
+    public abstract Day getDayOfWeekForOrdinalZero();
 
     /**
      * Returns the year (assume a valid range of 1900 to 9999).
@@ -650,11 +656,20 @@ public abstract class DayDate implements Comparable,
     public abstract int getDayOfMonth();
 
     /**
-     * Returns the day of the week.
+     * Returns a code representing the day of the week.
+     * <P>
+     * The codes are defined in the {@link DayDate} class as:
+     * <code>SUNDAY</code>, <code>MONDAY</code>, <code>TUESDAY</code>,
+     * <code>WEDNESDAY</code>, <code>THURSDAY</code>, <code>FRIDAY</code>, and
+     * <code>SATURDAY</code>.
      *
-     * @return the day of the week.
+     * @return A code representing the day of the week.
      */
-    public abstract int getDayOfWeek();
+    public Day getDayOfWeek() {
+        Day startingDay = getDayOfWeekForOrdinalZero();
+        int startingOffset = startingDay.ordinal() - Day.SUNDAY.ordinal();
+        return Day.make((getOrdinalDay() + startingOffset)  % 7 + 1);
+    }
 
     /**
      * Returns the difference (in days) between this date and the specified
