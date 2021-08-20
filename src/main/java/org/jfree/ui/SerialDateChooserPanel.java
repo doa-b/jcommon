@@ -199,7 +199,7 @@ public class SerialDateChooserPanel extends JPanel implements ActionListener {
         if (e.getActionCommand().equals("monthSelectionChanged")) {
             final JComboBox c = (JComboBox) e.getSource();
             this.date = DayDateFactory.makeDate(
-                this.date.getDayOfMonth(), c.getSelectedIndex() + 1, this.date.getYYYY()
+                this.date.getDayOfMonth(), c.getSelectedIndex() + 1, this.date.getYear()
             );
             refreshButtons();
         }
@@ -221,7 +221,7 @@ public class SerialDateChooserPanel extends JPanel implements ActionListener {
             final JButton b = (JButton) e.getSource();
             final int i = Integer.parseInt(b.getName());
             final DayDate first = getFirstVisibleDate();
-            final DayDate selected = DayDate.addDays(i, first);
+            final DayDate selected = DayDate.plusDays(i, first);
             setDate(selected);
         }
 
@@ -289,10 +289,10 @@ public class SerialDateChooserPanel extends JPanel implements ActionListener {
      */
     protected DayDate getFirstVisibleDate() {
 
-        DayDate result = DayDateFactory.makeDate(1, this.date.getMonth(), this.date.getYYYY());
-        result = DayDate.addDays(-1, result);
+        DayDate result = DayDateFactory.makeDate(1, this.date.getMonth(), this.date.getYear());
+        result = DayDate.plusDays(-1, result);
         while (result.getDayOfWeek() != getFirstDayOfWeek()) {
-            result = DayDate.addDays(-1, result);
+            result = DayDate.plusDays(-1, result);
         }
         return result;
 
@@ -317,7 +317,7 @@ public class SerialDateChooserPanel extends JPanel implements ActionListener {
             final JButton button = this.buttons[i];
             button.setText(String.valueOf(current.getDayOfWeek()));
             button.setBackground(getButtonColor(current));
-            current = DayDate.addDays(1, current);
+            current = DayDate.plusDays(1, current);
         }
 
     }
@@ -330,11 +330,11 @@ public class SerialDateChooserPanel extends JPanel implements ActionListener {
         if (!this.refreshing) {
             this.refreshing = true;
             this.yearSelector.removeAllItems();
-            final Vector v = getYears(this.date.getYYYY());
+            final Vector v = getYears(this.date.getYear());
             for (Enumeration e = v.elements(); e.hasMoreElements();) {
                 this.yearSelector.addItem(e.nextElement());
             }
-            this.yearSelector.setSelectedItem(new Integer(this.date.getYYYY()));
+            this.yearSelector.setSelectedItem(new Integer(this.date.getYear()));
             this.refreshing = false;
         }
     }

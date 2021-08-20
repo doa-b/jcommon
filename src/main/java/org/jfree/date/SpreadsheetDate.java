@@ -256,7 +256,7 @@ public class SpreadsheetDate extends DayDate {
      */
     public Date toDate() {
         final Calendar calendar = Calendar.getInstance();
-        calendar.set(getYYYY(), getMonth() - 1, getDayOfMonth(), 0, 0, 0);
+        calendar.set(getYear(), getMonth() - 1, getDayOfMonth(), 0, 0, 0);
         return calendar.getTime();
     }
 
@@ -265,7 +265,7 @@ public class SpreadsheetDate extends DayDate {
      *
      * @return The year.
      */
-    public int getYYYY() {
+    public int getYear() {
         return this.year;
     }
 

@@ -261,10 +261,10 @@ public class BobsSerialDateTest extends TestCase {
 
     public void testAddDays() throws Exception {
         DayDate newYears = d(1, JANUARY, 1900);
-        assertEquals(d(2, JANUARY, 1900), addDays(1, newYears));
-        assertEquals(d(1, FEBRUARY, 1900), addDays(31, newYears));
-        assertEquals(d(1, JANUARY, 1901), addDays(365, newYears));
-        assertEquals(d(31, DECEMBER, 1904), addDays(5 * 365, newYears));
+        assertEquals(d(2, JANUARY, 1900), plusDays(1, newYears));
+        assertEquals(d(1, FEBRUARY, 1900), plusDays(31, newYears));
+        assertEquals(d(1, JANUARY, 1901), plusDays(365, newYears));
+        assertEquals(d(31, DECEMBER, 1904), plusDays(5 * 365, newYears));
     }
 
     private static SpreadsheetDate d(int day, int month, int year) {
@@ -273,23 +273,23 @@ public class BobsSerialDateTest extends TestCase {
     }
 
     public void testAddMonths() throws Exception {
-        assertEquals(d(1, FEBRUARY, 1900), addMonths(1, d(1, JANUARY, 1900)));
-        assertEquals(d(28, FEBRUARY, 1900), addMonths(1, d(31, JANUARY, 1900)));
-        assertEquals(d(28, FEBRUARY, 1900), addMonths(1, d(30, JANUARY, 1900)));
-        assertEquals(d(28, FEBRUARY, 1900), addMonths(1, d(29, JANUARY, 1900)));
-        assertEquals(d(28, FEBRUARY, 1900), addMonths(1, d(28, JANUARY, 1900)));
-        assertEquals(d(27, FEBRUARY, 1900), addMonths(1, d(27, JANUARY, 1900)));
-        assertEquals(d(30, JUNE, 1900), addMonths(5, d(31, JANUARY, 1900)));
-        assertEquals(d(30, JUNE, 1901), addMonths(17, d(31, JANUARY, 1900)));
-        assertEquals(d(29, FEBRUARY, 1904), addMonths(49, d(31, JANUARY, 1900)));
+        assertEquals(d(1, FEBRUARY, 1900), plusMonths(1, d(1, JANUARY, 1900)));
+        assertEquals(d(28, FEBRUARY, 1900), plusMonths(1, d(31, JANUARY, 1900)));
+        assertEquals(d(28, FEBRUARY, 1900), plusMonths(1, d(30, JANUARY, 1900)));
+        assertEquals(d(28, FEBRUARY, 1900), plusMonths(1, d(29, JANUARY, 1900)));
+        assertEquals(d(28, FEBRUARY, 1900), plusMonths(1, d(28, JANUARY, 1900)));
+        assertEquals(d(27, FEBRUARY, 1900), plusMonths(1, d(27, JANUARY, 1900)));
+        assertEquals(d(30, JUNE, 1900), plusMonths(5, d(31, JANUARY, 1900)));
+        assertEquals(d(30, JUNE, 1901), plusMonths(17, d(31, JANUARY, 1900)));
+        assertEquals(d(29, FEBRUARY, 1904), plusMonths(49, d(31, JANUARY, 1900)));
 
     }
 
     public void testAddYears() throws Exception {
-        assertEquals(d(1, JANUARY, 1901), addYears(1, d(1, JANUARY, 1900)));
-        assertEquals(d(28, FEBRUARY, 1905), addYears(1, d(29, FEBRUARY, 1904)));
-        assertEquals(d(28, FEBRUARY, 1905), addYears(1, d(28, FEBRUARY, 1904)));
-        assertEquals(d(28, FEBRUARY, 1904), addYears(1, d(28, FEBRUARY, 1903)));
+        assertEquals(d(1, JANUARY, 1901), plusYears(1, d(1, JANUARY, 1900)));
+        assertEquals(d(28, FEBRUARY, 1905), plusYears(1, d(29, FEBRUARY, 1904)));
+        assertEquals(d(28, FEBRUARY, 1905), plusYears(1, d(28, FEBRUARY, 1904)));
+        assertEquals(d(28, FEBRUARY, 1904), plusYears(1, d(28, FEBRUARY, 1903)));
     }
 
     public void testGetPreviousDayOfWeek() throws Exception {
@@ -402,38 +402,16 @@ public class BobsSerialDateTest extends TestCase {
         assertEquals(d(29, FEBRUARY, 2008), d.getEndOfCurrentMonth(d(1, FEBRUARY, 2008)));
     }
 
-    public void testWeekInMonthToString() throws Exception {
-        assertEquals("First", weekInMonthToString(FIRST_WEEK_IN_MONTH));
-        assertEquals("Second", weekInMonthToString(SECOND_WEEK_IN_MONTH));
-        assertEquals("Third", weekInMonthToString(THIRD_WEEK_IN_MONTH));
-        assertEquals("Fourth", weekInMonthToString(FOURTH_WEEK_IN_MONTH));
-        assertEquals("Last", weekInMonthToString(LAST_WEEK_IN_MONTH));
 
-        try {
-            weekInMonthToString(-1);
-            fail("Invalid week code should throw exception");
-        } catch (IllegalArgumentException e) {
-        }
-    }
 
-    public void testRelativeToString() throws Exception {
-        assertEquals("Preceding", relativeToString(PRECEDING));
-        assertEquals("Nearest", relativeToString(NEAREST));
-        assertEquals("Following", relativeToString(FOLLOWING));
 
-        try {
-            relativeToString(-1000);
-            fail("Invalid relative code should throw exception");
-        } catch (IllegalArgumentException e) {
-        }
-    }
 
 
     public void testCreateInstanceFromDDMMYYY() throws Exception {
         DayDate date = DayDateFactory.makeDate(1, JANUARY, 1900);
         assertEquals(1, date.getDayOfMonth());
         assertEquals(JANUARY, date.getMonth());
-        assertEquals(1900, date.getYYYY());
+        assertEquals(1900, date.getYear());
         assertEquals(2, date.toOrdinal());
     }
 

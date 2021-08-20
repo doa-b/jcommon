@@ -447,7 +447,7 @@ public abstract class DayDate implements Comparable,
      * @param base the base date.
      * @return a new date.
      */
-    public static DayDate addDays(final int days, final DayDate base) {
+    public static DayDate plusDays(final int days, final DayDate base) {
         return DayDateFactory.makeDate(base.toOrdinal() + days);
 
     }
@@ -463,12 +463,12 @@ public abstract class DayDate implements Comparable,
      * @param base   the base date.
      * @return a new date.
      */
-    public static DayDate addMonths(final int months,
-                                    final DayDate base) {
+    public static DayDate plusMonths(final int months,
+                                     final DayDate base) {
 
-        final int yy = (12 * base.getYYYY() + base.getMonth() + months - 1)
+        final int yy = (12 * base.getYear() + base.getMonth() + months - 1)
                 / 12;
-        final int mm = (12 * base.getYYYY() + base.getMonth() + months - 1)
+        final int mm = (12 * base.getYear() + base.getMonth() + months - 1)
                 % 12 + 1;
         final int dd = Math.min(
                 base.getDayOfMonth(), DayDate.lastDayOfMonth(mm, yy)
@@ -485,9 +485,9 @@ public abstract class DayDate implements Comparable,
      * @param base  the base date.
      * @return A new date.
      */
-    public static DayDate addYears(final int years, final DayDate base) {
+    public static DayDate plusYears(final int years, final DayDate base) {
 
-        final int baseY = base.getYYYY();
+        final int baseY = base.getYear();
         final int baseM = base.getMonth();
         final int baseD = base.getDayOfMonth();
 
@@ -497,7 +497,6 @@ public abstract class DayDate implements Comparable,
         );
 
         return DayDateFactory.makeDate(targetD, baseM, targetY);
-
     }
 
     /**
@@ -528,7 +527,7 @@ public abstract class DayDate implements Comparable,
             adjust = -7 + Math.max(0, targetWeekday - baseDOW);
         }
 
-        return DayDate.addDays(adjust, base);
+        return DayDate.plusDays(adjust, base);
 
     }
 
@@ -560,7 +559,7 @@ public abstract class DayDate implements Comparable,
             adjust = Math.max(0, targetWeekday - baseDOW);
         }
 
-        return DayDate.addDays(adjust, base);
+        return DayDate.plusDays(adjust, base);
     }
 
     /**
@@ -590,7 +589,7 @@ public abstract class DayDate implements Comparable,
             adjust -= 7;
         }
 
-        return DayDate.addDays(adjust, base);
+        return DayDate.plusDays(adjust, base);
 
     }
 
@@ -602,59 +601,9 @@ public abstract class DayDate implements Comparable,
      */
     public DayDate getEndOfCurrentMonth(final DayDate base) {
         final int last = DayDate.lastDayOfMonth(
-                base.getMonth(), base.getYYYY()
+                base.getMonth(), base.getYear()
         );
-        return DayDateFactory.makeDate(last, base.getMonth(), base.getYYYY());
-    }
-
-    /**
-     * Returns a string corresponding to the week-in-the-month code.
-     * <p>
-     * Need to find a better approach.
-     *
-     * @param count an integer code representing the week-in-the-month.
-     * @return a string corresponding to the week-in-the-month code.
-     */
-    public static String weekInMonthToString(final int count) {
-
-        switch (count) {
-            case DayDate.FIRST_WEEK_IN_MONTH:
-                return "First";
-            case DayDate.SECOND_WEEK_IN_MONTH:
-                return "Second";
-            case DayDate.THIRD_WEEK_IN_MONTH:
-                return "Third";
-            case DayDate.FOURTH_WEEK_IN_MONTH:
-                return "Fourth";
-            case DayDate.LAST_WEEK_IN_MONTH:
-                return "Last";
-            default:
-                throw new IllegalArgumentException();
-        }
-
-    }
-
-    /**
-     * Returns a string representing the supplied 'relative'.
-     * <p>
-     * Need to find a better approach.
-     *
-     * @param relative a constant representing the 'relative'.
-     * @return a string representing the supplied 'relative'.
-     */
-    public static String relativeToString(final int relative) {
-
-        switch (relative) {
-            case DayDate.PRECEDING:
-                return "Preceding";
-            case DayDate.NEAREST:
-                return "Nearest";
-            case DayDate.FOLLOWING:
-                return "Following";
-            default:
-                throw new IllegalArgumentException();
-        }
-
+        return DayDateFactory.makeDate(last, base.getMonth(), base.getYear());
     }
 
     /**
@@ -676,7 +625,7 @@ public abstract class DayDate implements Comparable,
 
     public String toString() {
         return getDayOfMonth() + "-" + DayDate.monthCodeToString(getMonth())
-                + "-" + getYYYY();
+                + "-" + getYear();
     }
 
     /**
@@ -684,7 +633,7 @@ public abstract class DayDate implements Comparable,
      *
      * @return the year.
      */
-    public abstract int getYYYY();
+    public abstract int getYear();
 
     /**
      * Returns the month (January = 1, February = 2, March = 3).
