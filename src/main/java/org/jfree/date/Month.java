@@ -2,6 +2,8 @@ package org.jfree.date;
 
 import java.text.DateFormatSymbols;
 
+import static org.jfree.date.DayDate.isLeapYear;
+
 public enum Month {
     JANUARY(1), FEBRUARY(2), MARCH(3),
     APRIL(4), MAY(5), JUNE(6),
@@ -30,6 +32,14 @@ public enum Month {
     public int lastDay() {
         return LAST_DAY_OF_MONTH[index];
     }
+
+    public static int lastDayOfMonth(Month month, int year) {
+        if (month == Month.FEBRUARY && isLeapYear(year))
+            return month.lastDay() + 1;
+        else
+            return month.lastDay();
+    }
+
 
     public int quarter() {
         return 1 + (index - 1) / 3;

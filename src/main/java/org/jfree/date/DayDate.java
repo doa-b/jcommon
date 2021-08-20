@@ -448,9 +448,7 @@ public abstract class DayDate implements Comparable,
      * @return a new date.
      */
     public static DayDate addDays(final int days, final DayDate base) {
-
-        final int serialDayNumber = base.toSerial() + days;
-        return DayDateFactory.makeDate(serialDayNumber);
+        return DayDateFactory.makeDate(base.toOrdinal() + days);
 
     }
 
@@ -666,7 +664,7 @@ public abstract class DayDate implements Comparable,
      *
      * @return the serial number for the date.
      */
-    public abstract int toSerial();
+    public abstract int toOrdinal();
 
     /**
      * Returns a java.util.Date.  Since java.util.Date has more precision than

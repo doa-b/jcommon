@@ -213,7 +213,7 @@ public class SpreadsheetDateTest extends TestCase {
      * Create a date for 01-Jan-1900: the serial number should be 2.
      */
     public void test01Jan1900ToSerial() {
-        final int serial = this.jan1Y1900.toSerial();
+        final int serial = this.jan1Y1900.toOrdinal();
         assertEquals(2, serial);
     }
 
@@ -223,7 +223,7 @@ public class SpreadsheetDateTest extends TestCase {
     public void test28Feb1900ToSerial() {
         SpreadsheetDate d = new SpreadsheetDate(28, MonthConstants.FEBRUARY,
                 1900);
-        assertEquals(60, d.toSerial());
+        assertEquals(60, d.toOrdinal());
     }
 
     /**
@@ -231,7 +231,7 @@ public class SpreadsheetDateTest extends TestCase {
      */
     public void test01Mar1900ToSerial() {
         SpreadsheetDate d = new SpreadsheetDate(1, MonthConstants.MARCH, 1900);
-        assertEquals(61, d.toSerial());
+        assertEquals(61, d.toOrdinal());
     }
 
     /**
@@ -240,7 +240,7 @@ public class SpreadsheetDateTest extends TestCase {
     public void test31Dec1999ToSerial() {
         SpreadsheetDate d = new SpreadsheetDate(31, MonthConstants.DECEMBER,
                 1999);
-        assertEquals(36525, d.toSerial());
+        assertEquals(36525, d.toOrdinal());
     }
 
     /**
@@ -249,7 +249,7 @@ public class SpreadsheetDateTest extends TestCase {
     public void test01Jan2000ToSerial() {
         SpreadsheetDate d = new SpreadsheetDate(1, MonthConstants.JANUARY,
                 2000);
-        assertEquals(36526, d.toSerial());
+        assertEquals(36526, d.toOrdinal());
     }
 
     /**
@@ -258,7 +258,7 @@ public class SpreadsheetDateTest extends TestCase {
     public void test31Jan2000ToSerial() {
         SpreadsheetDate d = new SpreadsheetDate(31, MonthConstants.JANUARY,
                 2000);
-        assertEquals(36556, d.toSerial());
+        assertEquals(36556, d.toOrdinal());
     }
 
     /**
@@ -267,7 +267,7 @@ public class SpreadsheetDateTest extends TestCase {
     public void test01Feb2000ToSerial() {
         SpreadsheetDate d = new SpreadsheetDate(1, MonthConstants.FEBRUARY,
                 2000);
-        assertEquals(36557, d.toSerial());
+        assertEquals(36557, d.toOrdinal());
     }
 
     /**
@@ -276,7 +276,7 @@ public class SpreadsheetDateTest extends TestCase {
     public void test28Feb2000ToSerial() {
         SpreadsheetDate d = new SpreadsheetDate(28, MonthConstants.FEBRUARY,
                 2000);
-        assertEquals(36584, d.toSerial());
+        assertEquals(36584, d.toOrdinal());
     }
 
     /**
@@ -285,7 +285,7 @@ public class SpreadsheetDateTest extends TestCase {
     public void test29feb2000ToSerial() {
         SpreadsheetDate d = new SpreadsheetDate(29, MonthConstants.FEBRUARY,
                 2000);
-        assertEquals(36585, d.toSerial());
+        assertEquals(36585, d.toOrdinal());
     }
 
     /**
@@ -293,7 +293,7 @@ public class SpreadsheetDateTest extends TestCase {
      */
     public void test1mar2000ToSerial() {
         SpreadsheetDate d = new SpreadsheetDate(1, MonthConstants.MARCH, 2000);
-        assertEquals(36586, d.toSerial());
+        assertEquals(36586, d.toOrdinal());
     }
 
     /**
